@@ -1,0 +1,41 @@
+1.	Reorganize this code (tree height reduction)
+	ADD        R1,R2,R3
+	ADD        R4,R1,R6
+	ADD        R8,R4,R7
+
+	Solution - Now we do not have to wait for the first line to finish to start the second line
+
+	ADD        R1,R2,R3
+	ADD        R4,R6,R7
+	ADD        R8,R1,R4
+
+2.	Write some C code to cause a mutex to pause so all threads cannot access a shared variable so you do not have a race condition
+	
+
+	// Global
+	pthread_mutex_t lock;
+	int x = 5
+
+	// Initialize mutex
+	pthread_mutex_init(&lock, NULL);
+
+	// In every thread you would lock the mutex so no other thread can change it. Be sure to unlock the mutex
+	void * thread1(void *arg){
+
+		pthread_mutex_lock(&lock);
+		x = 6;
+		pthread_mutex_unlock(&lock);
+	}
+
+	void * thread2(void *arg){
+
+		pthread_mutex_lock(&lock);
+		x = 7;
+		pthread_mutex_unlock(&lock);
+	}
+
+	
+	// Destroy mutex
+	pthread_mutex_destroy(&lock);
+
+3. 
